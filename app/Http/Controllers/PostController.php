@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+//use PDF;
 use App\Http\Requests\StorePostRequest;
 use App\Mail\PostCreatedMail;
 use App\Models\Post;
@@ -92,5 +94,33 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+    /*
+    public function report(){
+
+        $posts = Post::all();
+        $pdf = Pdf::loadView('posts.report', compact('posts'));
+        //return $pdf->download('posts_report.pdf');
+        return $pdf->stream('posts_report.pdf');
+        
+    }
+    */
+
+    public function pdf_generator_get(Request $request){
+
+        //echo 'PDF'; die();
+        
+        $posts = Post::get();
+
+        $data = [
+            'title' => 'Lista de posts',
+            'date' => date('Y-m-d'),
+            'posts' => $posts           
+            
+        ];
+        $pdf = PDF::loadView('posts.myPDF', $data);
+        //return $pdf->download('lista_post.pdf');
+        return $pdf->stream('lista_post.pdf');
+        
     }
 }

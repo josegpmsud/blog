@@ -15,7 +15,11 @@ Route::get('/posts/{post}/edit', [PostController::class,'edit'])->name('posts.ed
 Route::put('/posts/{post}', [PostController::class,'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class,'destroy'])->name('posts.destroy');
 */
+
+
 Route::resource('posts', PostController::class);
+
+Route::get('pdf_generator', [PostController::class,'pdf_generator_get']);
 
 //Get
 //Post
