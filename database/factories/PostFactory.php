@@ -17,10 +17,11 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->word(),
-            'content' => fake()->text(500),
-            'category'=> fake()->word(),
-            'published_at' => now(),     
+            'title' => $this->faker->word(),
+            'slug' => $this->faker->slug(),
+            'content' => $this->faker->text(500),
+            'category'=> $this->faker->word(),
+            'published_at' => now(),    
             
         ];
     }
